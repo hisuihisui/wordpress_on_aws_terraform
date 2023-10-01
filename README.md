@@ -1,2 +1,2 @@
-# terraform_wordpress_on_aws
+# wordpress_on_aws_terraform
 AWSにWordpressが動作する環境を作成するTerraformのコード
