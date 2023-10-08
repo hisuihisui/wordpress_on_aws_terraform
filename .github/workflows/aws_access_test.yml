@@ -3,7 +3,7 @@ on:
   push:
     branches:
       # 作業ブランチ
-      - test
+      - main
 
 env:
   # ×××××××××：AWSアカウントID
