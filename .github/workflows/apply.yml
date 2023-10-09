@@ -1,0 +1,63 @@
+name: TerraformApply
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+env:
+  AWS_DEFAULT_REGION: ap-northeast-1
+  AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+  TF_VERSION: 1.6.0
+  WORK_DIR: ./environments/prod
+
+permissions:
+  id-token: write
+  contents: read
+  actions: read
+  pull-requests: write
+
+jobs:
+  Terraform_Apply:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # リポジトリのチェックアウトをする。
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      # OICDでAssumeRoleをする。
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+
+      - name: Setup Terraform
+        # バージョン2を使用する
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Exec Terraform fmt check
+        id: fmt
+        working-directory: "${{ env.WORK_DIR }}"
+        run: terraform fmt -recursive -check
+        # exit code 3でエラーになり終了してしまうため
+        # continue-on-error: true で後続の処理も続ける。
+        continue-on-error: true
+
+      - name: Exec Terraform init
+        id: init
+        working-directory: "${{ env.WORK_DIR }}"
+        run: terraform init
+
+      - name: terraform apply
+        id: apply
+        working-directory: "${{ env.WORK_DIR }}"
+        run: terraform apply -auto-approve
