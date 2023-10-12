@@ -4,7 +4,7 @@ terraform {
     bucket = "tfstate-animevoyager"
     region = "ap-northeast-1"
     # バケット内の保存先
-    key = "tfstate/terraform.tfstate"
+    key     = "tfstate/terraform.tfstate"
     encrypt = true
   }
 }
