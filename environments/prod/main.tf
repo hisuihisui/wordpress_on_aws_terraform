@@ -1,3 +1,3 @@
 module "animevoyager" {
-  source = "../../modules/animevoyager"
+  source = "../../services/animevoyager"
 }
