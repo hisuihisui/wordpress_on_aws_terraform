@@ -10,37 +10,11 @@ resource "aws_subnet" "public" {
   }
 }
 
-# Internet Gateway
-resource "aws_internet_gateway" "public" {
-  vpc_id = var.vpc_id
-
-  tags = {
-    Name = "${var.prefix}-internet_gateway-${var.az}"
-  }
-}
-
-# Route Table
-resource "aws_route_table" "public" {
-  vpc_id = var.vpc_id
-
-  tags = {
-    Name = "${var.prefix}-public-route_table-${var.az}"
-  }
-}
-
-# Route
-resource "aws_route" "public" {
-  route_table_id = aws_route_table.public.id
-  gateway_id     = aws_internet_gateway.public.id
-  # 通信先
-  # インターネットへの疎通許可
-  destination_cidr_block = "0.0.0.0/0"
-}
 
 # ルートテーブルとサブネットを関連付け
 resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.public.id
-  route_table_id = aws_route_table.public.id
+  route_table_id = var.public_route_table_id
 }
 
 
@@ -54,15 +28,6 @@ resource "aws_subnet" "private" {
 
   tags = {
     Name = "${var.prefix}-private_Subnet_${var.az}"
-  }
-}
-
-# Route Table
-resource "aws_route_table" "private" {
-  vpc_id = var.vpc_id
-
-  tags = {
-    Name = "${var.prefix}-private-route_table-${var.az}"
   }
 }
 
