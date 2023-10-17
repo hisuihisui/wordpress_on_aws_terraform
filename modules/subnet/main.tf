@@ -72,7 +72,7 @@ resource "aws_route" "private" {
   # 0：作成しない、1：作成する
   count = var.is_nat_gateway
   route_table_id = aws_route_table.private.id
-  nat_gateway_id = aws_nat_gateway.main.id
+  nat_gateway_id = aws_nat_gateway.main[0].id
   destination_cidr_block = "0.0.0.0/0"
 }
 
