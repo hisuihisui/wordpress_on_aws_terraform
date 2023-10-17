@@ -89,7 +89,7 @@ resource "aws_eip" "nat_gateway" {
 resource "aws_nat_gateway" "main" {
   count = var.is_nat_gateway
   # EIPの指定
-  allocation_id = aws_eip.nat_gateway.id
+  allocation_id = aws_eip.nat_gateway[0].id
   # サブネット
   # パブリックサブネットを指定すること
   subnet_id = aws_subnet.public.id
