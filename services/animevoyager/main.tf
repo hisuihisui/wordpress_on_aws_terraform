@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "public" {
 
 # Subnet
 module "subnet_1a" {
-  source              = "../subnet"
+  source              = "../../modules/subnet"
   count_nat_gateway   = 1
   internet_gateway_id = aws_internet_gateway.public.id
   prefix              = local.prefix
@@ -28,7 +28,7 @@ module "subnet_1a" {
 }
 
 module "subnet_1c" {
-  source              = "../subnet"
+  source              = "../../modules/subnet"
   az                  = "ap-northeast-1c"
   count_nat_gateway   = 0
   internet_gateway_id = aws_internet_gateway.public.id
