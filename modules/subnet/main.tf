@@ -93,4 +93,7 @@ resource "aws_nat_gateway" "main" {
   # サブネット
   # パブリックサブネットを指定すること
   subnet_id = aws_subnet.public.id
+  tags = {
+    Name = "${var.prefix}-nat_gateway-${var.az}"
+  }
 }
