@@ -3,12 +3,12 @@ variable "az" {
   default = "ap-northeast-1a"
 }
 
-variable "internet_gateway_id" {}
-
-# NAT Gatewayを作るか
-variable "is_nat_gateway" {
+# NAT Gatewayをいくつ作るか
+variable "count_nat_gateway" {
   default = 0
 }
+
+variable "internet_gateway_id" {}
 
 # Prefix
 variable "prefix" {

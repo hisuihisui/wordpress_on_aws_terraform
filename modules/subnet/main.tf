@@ -70,15 +70,15 @@ resource "aws_route_table_association" "private" {
 resource "aws_route" "private" {
   # リソースを作成するか
   # 0：作成しない、1：作成する
-  count = var.is_nat_gateway
-  route_table_id = aws_route_table.private.id
-  nat_gateway_id = aws_nat_gateway.main[0].id
+  count                  = var.count_nat_gateway
+  route_table_id         = aws_route_table.private.id
+  nat_gateway_id         = aws_nat_gateway.main[0].id
   destination_cidr_block = "0.0.0.0/0"
 }
 
 # NATゲートウェイ用EIP
 resource "aws_eip" "nat_gateway" {
-  count = var.is_nat_gateway
+  count  = var.count_nat_gateway
   domain = "vpc"
   tags = {
     Name = "${var.prefix}-eip-nat_gateway-${var.az}"
@@ -87,7 +87,7 @@ resource "aws_eip" "nat_gateway" {
 
 # NATゲートウェイ
 resource "aws_nat_gateway" "main" {
-  count = var.is_nat_gateway
+  count = var.count_nat_gateway
   # EIPの指定
   allocation_id = aws_eip.nat_gateway[0].id
   # サブネット
