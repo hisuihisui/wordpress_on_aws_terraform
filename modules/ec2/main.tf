@@ -27,7 +27,7 @@ resource "aws_security_group" "wordpress_ec2" {
 
 # EC2用EIP
 resource "aws_eip" "ec2" {
-  instance = aws_instance.instance_id
+  instance = aws_instance.wordpress.id
   domain   = "vpc"
   tags = {
     Name = "${var.prefix}-eip-ec2-${var.az}"
