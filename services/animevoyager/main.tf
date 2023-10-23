@@ -20,8 +20,6 @@ resource "aws_internet_gateway" "public" {
 # Subnet
 module "subnet_1a" {
   source              = "../../modules/subnet"
-  count_ec2           = 1
-  instance_id         = module.ec2_1a.instance_id
   internet_gateway_id = aws_internet_gateway.public.id
   prefix              = local.prefix
   vpc_id              = aws_vpc.main.id
@@ -31,7 +29,6 @@ module "subnet_1a" {
 module "subnet_1c" {
   source              = "../../modules/subnet"
   az                  = "ap-northeast-1c"
-  count_ec2           = 0
   internet_gateway_id = aws_internet_gateway.public.id
   prefix              = local.prefix
   private_subnet_cidr = "172.16.11.0/24"

@@ -3,14 +3,8 @@ variable "az" {
   default = "ap-northeast-1a"
 }
 
-# EC2をいくつ作るか
-variable "count_ec2" {
-  default = 0
-}
-
-variable "instance_id" {
-  default = ""
-}
+# NAT Gatewayをいくつ作るか
+# variable "count_nat_gateway" { }
 
 variable "internet_gateway_id" {}
 
