@@ -3,7 +3,7 @@ resource "aws_instance" "wordpress" {
   ami           = var.ami
   instance_type = var.instance_type
   subnet_id     = var.private_subnet_id
-  user_data     = file("./scripts/user_data.sh")
+  user_data     = templatefile("${path.module}/scripts/user_data.sh")
 
   vpc_security_group_ids = [aws_security_group.wordpress_ec2.id]
 
