@@ -78,8 +78,9 @@ resource "aws_route_table_association" "public" {
 
 # EC2用EIP
 resource "aws_eip" "ec2" {
-  count  = var.count_ec2
-  domain = "vpc"
+  count    = var.count_ec2
+  instance = var.instance_id
+  domain   = "vpc"
   tags = {
     Name = "${var.prefix}-eip-ec2-${var.az}"
   }
