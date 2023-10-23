@@ -10,6 +10,6 @@ variable "prefix" {
   type = string
 }
 
-variable "private_subnet_id" {}
+variable "public_subnet_id" {}
 
 variable "vpc_id" {}
