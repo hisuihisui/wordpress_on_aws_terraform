@@ -41,10 +41,10 @@ module "subnet_1c" {
 
 # EC2
 module "ec2_1a" {
-  source = "../../modules/ec2"
-  ami = local.ami
-  instance_type = local.instance_type
-  prefix = local.prefix
+  source            = "../../modules/ec2"
+  ami               = local.ami
+  instance_type     = local.instance_type
+  prefix            = local.prefix
   private_subnet_id = module.subnet_1a.private_subnet_id
-  vpc_id = aws_vpc.main.id
+  vpc_id            = aws_vpc.main.id
 }
