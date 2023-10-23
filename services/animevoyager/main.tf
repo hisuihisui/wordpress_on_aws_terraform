@@ -20,7 +20,8 @@ resource "aws_internet_gateway" "public" {
 # Subnet
 module "subnet_1a" {
   source              = "../../modules/subnet"
-  count_nat_gateway   = 1
+  count_ec2           = 1
+  instance_id         = module.ec2_1a.instance_id
   internet_gateway_id = aws_internet_gateway.public.id
   prefix              = local.prefix
   vpc_id              = aws_vpc.main.id
@@ -30,7 +31,7 @@ module "subnet_1a" {
 module "subnet_1c" {
   source              = "../../modules/subnet"
   az                  = "ap-northeast-1c"
-  count_nat_gateway   = 0
+  count_ec2           = 0
   internet_gateway_id = aws_internet_gateway.public.id
   prefix              = local.prefix
   private_subnet_cidr = "172.16.11.0/24"
@@ -41,10 +42,10 @@ module "subnet_1c" {
 
 # EC2
 module "ec2_1a" {
-  source            = "../../modules/ec2"
-  ami               = local.ami
-  instance_type     = local.instance_type
-  prefix            = local.prefix
-  private_subnet_id = module.subnet_1a.private_subnet_id
-  vpc_id            = aws_vpc.main.id
+  source           = "../../modules/ec2"
+  ami              = local.ami
+  instance_type    = local.instance_type
+  prefix           = local.prefix
+  public_subnet_id = module.subnet_1a.public_subnet_id
+  vpc_id           = aws_vpc.main.id
 }
