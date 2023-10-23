@@ -76,15 +76,14 @@ resource "aws_route_table_association" "public" {
 #   destination_cidr_block = "0.0.0.0/0"
 # }
 
-# EC2用EIP
-resource "aws_eip" "ec2" {
-  count    = var.count_ec2
-  instance = var.instance_id
-  domain   = "vpc"
-  tags = {
-    Name = "${var.prefix}-eip-ec2-${var.az}"
-  }
-}
+# # NATゲートウェイ用EIP
+# resource "aws_eip" "nat_gateway" {
+#   count  = var.count_nat_gateway
+#   domain = "vpc"
+#   tags = {
+#     Name = "${var.prefix}-eip-nat_gateway-${var.az}"
+#   }
+# }
 
 # # NATゲートウェイ
 # resource "aws_nat_gateway" "main" {

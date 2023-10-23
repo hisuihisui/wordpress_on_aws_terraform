@@ -24,3 +24,12 @@ resource "aws_security_group" "wordpress_ec2" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+# EC2用EIP
+resource "aws_eip" "ec2" {
+  instance = aws_instance.wordpress.id
+  domain   = "vpc"
+  tags = {
+    Name = "${var.prefix}-eip-ec2-${var.az}"
+  }
+}
