@@ -1,5 +1,7 @@
 variable "ami" {}
 
+variable "alb_sg_id" {}
+
 variable "az" {
   default = "ap-northeast-1a"
 }

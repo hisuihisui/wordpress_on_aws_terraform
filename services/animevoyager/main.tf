@@ -40,9 +40,22 @@ module "subnet_1c" {
 # EC2
 module "ec2_1a" {
   source           = "../../modules/ec2"
+  alb_sg_id        = module.alb.alb_sg_id
   ami              = local.ami
   instance_type    = local.instance_type
   prefix           = local.prefix
   public_subnet_id = module.subnet_1a.public_subnet_id
   vpc_id           = aws_vpc.main.id
+}
+
+# ALB
+module "alb" {
+  source = "../../modules/elb"
+  prefix = local.prefix
+  subnets = [
+    module.subnet_1a.public_subnet_id,
+    module.subnet_1c.public_subnet_id
+  ]
+  vpc_id           = aws_vpc.main.id
+  wordpress_ec2_id = module.ec2_1a.instance_id
 }
