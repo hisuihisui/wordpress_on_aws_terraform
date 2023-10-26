@@ -17,7 +17,7 @@ resource "aws_security_group" "wordpress_ec2" {
   description = "with wordpress ec2"
   vpc_id      = var.vpc_id
 
-  ingress = {
+  ingress {
     security_groups = [var.alb_sg_id]
   }
 
