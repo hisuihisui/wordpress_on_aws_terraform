@@ -40,7 +40,7 @@ module "subnet_1c" {
 # EC2
 module "ec2_1a" {
   source           = "../../modules/ec2"
-  alb_sg_id        = module.alb.alb_sg_id
+  alb_sg_id        = module.elb.alb_sg_id
   ami              = local.ami
   instance_type    = local.instance_type
   prefix           = local.prefix
