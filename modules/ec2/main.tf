@@ -18,6 +18,9 @@ resource "aws_security_group" "wordpress_ec2" {
   vpc_id      = var.vpc_id
 
   ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
     security_groups = [var.alb_sg_id]
   }
 
