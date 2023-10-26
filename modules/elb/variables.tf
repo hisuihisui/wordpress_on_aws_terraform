@@ -10,5 +10,3 @@ variable "subnets" {
 variable "vpc_id" {}
 
 variable "wordpress_ec2_id" {}
-
-variable "wordpress_ec2_sg_id" {}

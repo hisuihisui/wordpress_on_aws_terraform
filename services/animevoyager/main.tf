@@ -56,7 +56,6 @@ module "alb" {
     module.subnet_1a.public_subnet_id,
     module.subnet_1c.public_subnet_id
   ]
-  vpc_id              = aws_vpc.main.id
-  wordpress_ec2_id    = module.ec2_1a.instance_id
-  wordpress_ec2_sg_id = module.ec2_1a.ec2_sg_id
+  vpc_id           = aws_vpc.main.id
+  wordpress_ec2_id = module.ec2_1a.instance_id
 }
