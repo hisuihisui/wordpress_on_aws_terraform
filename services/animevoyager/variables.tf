@@ -5,11 +5,6 @@ locals {
   prefix        = "animevoyager-${var.env}"
 }
 
-# VPC
-variable "cidr_block" {
-  default = "172.16.0.0/16"
-}
-
 variable "env" {
   type    = string
   default = "prod"

@@ -1,6 +1,6 @@
 # VPC
 resource "aws_vpc" "main" {
-  cidr_block = var.cidr_block
+  cidr_block = "172.16.0.0/16"
 
   tags = {
     Name = "${local.prefix}-vpc"
