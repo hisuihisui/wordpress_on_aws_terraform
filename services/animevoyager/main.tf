@@ -1,6 +1,6 @@
 # VPC
 resource "aws_vpc" "main" {
-  cidr_block = "172.16.0.0/16"
+  cidr_block = local.vpc_cidr_block
 
   tags = {
     Name = "${local.prefix}-vpc"
@@ -56,5 +56,6 @@ module "alb" {
     module.subnet_1c.public_subnet_id
   ]
   vpc_id           = aws_vpc.main.id
+  vpc_cidr_block   = local.vpc_cidr_block
   wordpress_ec2_id = module.ec2_1a.instance_id
 }
