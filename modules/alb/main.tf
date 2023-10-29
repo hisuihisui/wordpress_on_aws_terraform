@@ -38,9 +38,9 @@ resource "aws_security_group_rule" "wordpress_alb_sg_ingress_http" {
 resource "aws_security_group_rule" "wordpress_alb_sg_egress" {
   security_group_id = aws_security_group.wordpress_alb_sg.id
   type              = "egress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
   cidr_blocks       = [var.vpc_cidr_block]
 }
 
