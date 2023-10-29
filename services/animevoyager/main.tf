@@ -55,7 +55,7 @@ module "alb" {
     module.subnet_1a.public_subnet_id,
     module.subnet_1c.public_subnet_id
   ]
-  vpc_id           = aws_vpc.main.id
-  vpc_cidr_block   = local.vpc_cidr_block
-  wordpress_ec2_id = module.ec2_1a.instance_id
+  vpc_id                = aws_vpc.main.id
+  vpc_cidr_block        = local.vpc_cidr_block
+  wordpress_ec2_id_list = [module.ec2_1a.instance_id]
 }
