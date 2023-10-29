@@ -57,5 +57,5 @@ module "alb" {
   ]
   vpc_id           = aws_vpc.main.id
   vpc_cidr_block   = local.vpc_cidr_block
-  wordpress_ec2_id = module.ec2_1a.instance_id
+  wordpress_ec2_id_list = [module.ec2_1a.instance_id]
 }
