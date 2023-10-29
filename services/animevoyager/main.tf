@@ -1,6 +1,6 @@
 # VPC
 resource "aws_vpc" "main" {
-  cidr_block = var.cidr_block
+  cidr_block = local.vpc_cidr_block
 
   tags = {
     Name = "${local.prefix}-vpc"
@@ -31,7 +31,6 @@ module "subnet_1c" {
   az                  = "ap-northeast-1c"
   internet_gateway_id = aws_internet_gateway.public.id
   prefix              = local.prefix
-  private_subnet_cidr = "172.16.11.0/24"
   public_subnet_cidr  = "172.16.10.0/24"
   vpc_id              = aws_vpc.main.id
 }
@@ -50,12 +49,13 @@ module "ec2_1a" {
 
 # ALB
 module "alb" {
-  source = "../../modules/elb"
+  source = "../../modules/alb"
   prefix = local.prefix
   subnets = [
     module.subnet_1a.public_subnet_id,
     module.subnet_1c.public_subnet_id
   ]
   vpc_id           = aws_vpc.main.id
+  vpc_cidr_block   = local.vpc_cidr_block
   wordpress_ec2_id = module.ec2_1a.instance_id
 }

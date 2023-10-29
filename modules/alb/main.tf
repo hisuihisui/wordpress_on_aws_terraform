@@ -41,7 +41,7 @@ resource "aws_security_group_rule" "wordpress_alb_sg_egress" {
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = [var.vpc_cidr_block]
 }
 
 # HTTPリスナー
