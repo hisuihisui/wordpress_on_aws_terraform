@@ -9,7 +9,7 @@ env:
   AWS_DEFAULT_REGION: ap-northeast-1
   AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
   TF_VERSION: 1.6.0
-  WORK_DIR: ./environments/prod
+  WORK_DIR: ./services/animevoyager
 
 permissions:
   id-token: write
