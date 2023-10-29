@@ -17,27 +17,23 @@ resource "aws_security_group" "wordpress_ec2" {
   description = "with wordpress ec2"
   vpc_id      = var.vpc_id
 
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = [var.alb_sg_id]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   tags = {
     Name = "${var.prefix}-ec2-wordpress-sg"
   }
-}
-
-resource "aws_security_group_rule" "ingress_from_alb_http" {
-  security_group_id        = aws_security_group.wordpress_ec2.id
-  type                     = "ingress"
-  from_port                = 80
-  to_port                  = 80
-  protocol                 = "tcp"
-  source_security_group_id = var.alb_sg_id
-}
-
-resource "aws_security_group_rule" "egress_to_internet" {
-  security_group_id = aws_security_group.wordpress_ec2.id
-  type              = "egress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
 }
 
 # EC2用EIP
