@@ -28,7 +28,7 @@ resource "aws_security_group_rule" "ingress_from_alb_http" {
   from_port                = 80
   to_port                  = 80
   protocol                 = "tcp"
-  source_security_group_id = [var.alb_sg_id]
+  source_security_group_id = var.alb_sg_id
 }
 
 resource "aws_security_group_rule" "egress_to_internet" {
