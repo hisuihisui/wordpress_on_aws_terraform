@@ -9,7 +9,7 @@ resource "aws_route53_record" "alb_alias" {
 
   alias {
     name                   = var.alb_parameter.dns_name
-    zone_id                = var.alb_parameter.main.zone_id
+    zone_id                = var.alb_parameter.zone_id
     evaluate_target_health = true
   }
 }
