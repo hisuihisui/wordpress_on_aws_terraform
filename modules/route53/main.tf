@@ -3,7 +3,7 @@ resource "aws_route53_zone" "hostzone" {
 }
 
 resource "aws_route53_record" "alb_alias" {
-  zone_id = aws_route53_zone.main.zone_id
+  zone_id = aws_route53_zone.hostzone.zone_id
   name    = var.domain
   type    = "A"
 
