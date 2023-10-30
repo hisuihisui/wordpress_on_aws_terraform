@@ -59,3 +59,13 @@ module "alb" {
   vpc_cidr_block        = local.vpc_cidr_block
   wordpress_ec2_id_list = [module.ec2_1a.instance_id]
 }
+
+# Route53
+module "route53" {
+  source = "../../modules/route53"
+  domain = local.domain
+  alb_parameter = {
+    dns_name  = module.alb.alb_dns_name
+    zone_id   = module.alb.alb_zone_id
+  }
+}
