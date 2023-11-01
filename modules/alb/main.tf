@@ -35,7 +35,7 @@ resource "aws_security_group_rule" "wordpress_alb_sg_ingress_http" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
-resource "aws_security_group_rule" "wordpress_alb_sg_ingress_http" {
+resource "aws_security_group_rule" "wordpress_alb_sg_ingress_https" {
   security_group_id = aws_security_group.wordpress_alb_sg.id
   type              = "ingress"
   from_port         = "443"
