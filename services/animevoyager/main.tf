@@ -50,6 +50,7 @@ module "ec2_1a" {
 # ALB
 module "alb" {
   source = "../../modules/alb"
+  certificate_arn = module.route53.certificate_arn
   prefix = local.prefix
   subnets = [
     module.subnet_1a.public_subnet_id,
@@ -65,7 +66,7 @@ module "route53" {
   source = "../../modules/route53"
   domain = local.domain
   alb_parameter = {
-    dns_name  = module.alb.alb_dns_name
-    zone_id   = module.alb.alb_zone_id
+    dns_name = module.alb.alb_dns_name
+    zone_id  = module.alb.alb_zone_id
   }
 }

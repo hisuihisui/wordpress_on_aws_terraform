@@ -7,6 +7,6 @@ variable "alb_parameter" {
 }
 
 variable "domain" {
-  type = string
+  type        = string
   description = "ホストゾーンに設定するドメイン"
 }
