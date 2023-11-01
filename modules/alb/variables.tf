@@ -1,3 +1,5 @@
+variable "certificate_arn" {}
+
 variable "prefix" {
   type = string
 }
