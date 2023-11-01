@@ -16,8 +16,8 @@ resource "aws_route53_record" "alb_alias" {
 
 # ACMでSSL証明書を作成
 resource "aws_acm_certificate" "cert" {
-  domain_name       = var.domain
-  validation_method = "DNS"
+  domain_name               = var.domain
+  validation_method         = "DNS"
   subject_alternative_names = ["*.${var.domain}"]
 
   lifecycle {
@@ -41,9 +41,10 @@ resource "aws_route53_record" "cert" {
     }
   }
 
-  name    = each.value.name
-  type    = each.value.type
-  records = [each.value.record]
-  zone_id = aws_route53_zone.hostzone.zone_id
-  ttl     = 60
+  name            = each.value.name
+  type            = each.value.type
+  records         = [each.value.record]
+  zone_id         = aws_route53_zone.hostzone.zone_id
+  ttl             = 60
+  allow_overwrite = true
 }

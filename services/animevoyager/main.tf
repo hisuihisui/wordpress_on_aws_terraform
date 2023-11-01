@@ -49,9 +49,9 @@ module "ec2_1a" {
 
 # ALB
 module "alb" {
-  source = "../../modules/alb"
+  source          = "../../modules/alb"
   certificate_arn = module.route53.certificate_arn
-  prefix = local.prefix
+  prefix          = local.prefix
   subnets = [
     module.subnet_1a.public_subnet_id,
     module.subnet_1c.public_subnet_id
