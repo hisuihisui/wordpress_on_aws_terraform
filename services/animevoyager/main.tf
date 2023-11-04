@@ -63,7 +63,7 @@ module "alb_external" {
 
 # Route53
 module "domain" {
-  source = "../../modules/route53"
+  source = "../../modules/domain"
   domain = local.domain
   alb_parameter = {
     dns_name = module.alb_external.alb_dns_name
