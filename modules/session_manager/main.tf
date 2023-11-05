@@ -11,11 +11,19 @@ data "aws_iam_policy_document" "ec2_ssm_policy_doc" {
     effect = "Allow"
     actions = [
       "s3:PutObject",
+    ]
+    resources = [
+      "${var.log_bucket_arn}/session_manager/*"
+    ]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
       "s3:GetEncryptionConfiguration"
     ]
     resources = [
-      "${var.log_bucket_arn}",
-      "${var.log_bucket_arn}/*"
+      "*"
     ]
   }
 }
@@ -45,7 +53,7 @@ resource "aws_ssm_document" "session_manager_prefs" {
     inputs = {
       s3BucketName        = var.log_bucket_name
       s3KeyPrefix         = "session_manager/"
-      s3EncryptionEnabled = false
+      s3EncryptionEnabled = true
     }
   })
 }
