@@ -6,6 +6,8 @@ variable "az" {
   default = "ap-northeast-1a"
 }
 
+variable "instance_profile_name" {}
+
 variable "instance_type" {}
 
 variable "prefix" {

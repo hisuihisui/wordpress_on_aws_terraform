@@ -7,6 +7,8 @@ resource "aws_instance" "wordpress" {
 
   vpc_security_group_ids = [aws_security_group.wordpress_ec2.id]
 
+  iam_instance_profile = var.instance_profile_name
+
   tags = {
     Name = "${var.prefix}-ec2-wordpress-${var.az}"
   }
