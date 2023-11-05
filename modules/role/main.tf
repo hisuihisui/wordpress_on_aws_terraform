@@ -19,5 +19,5 @@ data "aws_iam_policy_document" "assume_role" {
 # インスタンスプロファイル
 resource "aws_iam_instance_profile" "wordpress_ec2" {
   name = "wordpress_instance_profile"
-  role = aws_iam_role.wordpress_ec2_role
+  role = aws_iam_role.wordpress_ec2_role.name
 }
