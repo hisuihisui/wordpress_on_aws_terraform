@@ -54,10 +54,10 @@ module "ec2_1a" {
 
 # Session Manager
 module "session_manager" {
-  source         = "../../modules/session_manager"
-  log_bucket_arn = module.log_bucket.bucket_arn
-  log_bucket_name = "${local.prefix}-log-bucket"
-  role_name      = module.role.wordpress_ec2_role_name
+  source            = "../../modules/session_manager"
+  log_bucket_arn    = module.log_bucket.bucket_arn
+  log_bucket_name   = "${local.prefix}-log-bucket"
+  role_name         = module.role.wordpress_ec2_role_name
   ssm_document_name = "${local.prefix}-SessionManagerRunShell"
 }
 

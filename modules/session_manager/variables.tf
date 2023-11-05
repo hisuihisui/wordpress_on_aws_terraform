@@ -3,7 +3,7 @@ variable "log_bucket_arn" {
 }
 
 variable "log_bucket_name" {
-  type        = string
+  type = string
 }
 
 variable "role_name" {
@@ -11,6 +11,6 @@ variable "role_name" {
 }
 
 variable "ssm_document_name" {
-  type        = string
-  default     = "SSM-SessionManagerRunShell"
+  type    = string
+  default = "SSM-SessionManagerRunShell"
 }
