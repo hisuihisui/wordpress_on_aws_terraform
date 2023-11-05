@@ -35,16 +35,36 @@ module "subnet_1c" {
   vpc_id              = aws_vpc.main.id
 }
 
+# IAMロール
+module "role" {
+  source = "../../modules/role"
+}
 
 # EC2
 module "ec2_1a" {
-  source           = "../../modules/ec2"
-  alb_sg_id        = module.alb.alb_sg_id
-  ami              = local.ami
-  instance_type    = local.instance_type
-  prefix           = local.prefix
-  public_subnet_id = module.subnet_1a.public_subnet_id
-  vpc_id           = aws_vpc.main.id
+  source                = "../../modules/ec2"
+  alb_sg_id             = module.alb.alb_sg_id
+  ami                   = local.ami
+  instance_profile_name = module.role.wordpress_instance_profile_name
+  instance_type         = local.instance_type
+  prefix                = local.prefix
+  public_subnet_id      = module.subnet_1a.public_subnet_id
+  vpc_id                = aws_vpc.main.id
+}
+
+# Session Manager
+module "session_manager" {
+  source         = "../../modules/session_manager"
+  log_bucket_arn = module.log_bucket.bucket_arn
+  log_bucket_name = "${local.prefix}-log-bucket"
+  role_name      = module.role.wordpress_ec2_role_name
+  ssm_document_name = "${local.prefix}-SessionManagerRunShell"
+}
+
+# ログ保管用S3バケット
+module "log_bucket" {
+  source      = "../../modules/log_s3"
+  bucket_name = "${local.prefix}-log-bucket"
 }
 
 # ALB
