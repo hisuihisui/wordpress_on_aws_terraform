@@ -26,6 +26,16 @@ data "aws_iam_policy_document" "ec2_ssm_policy_doc" {
       "*"
     ]
   }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "kms:GenerateDataKey"
+    ]
+    resources = [
+      "*"
+    ]
+  }
 }
 
 # SSMを使用するためのIAMポリシーの作成
