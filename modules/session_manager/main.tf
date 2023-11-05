@@ -16,26 +16,6 @@ data "aws_iam_policy_document" "ec2_ssm_policy_doc" {
       "${var.log_bucket_arn}/session_manager/*"
     ]
   }
-
-  statement {
-    effect = "Allow"
-    actions = [
-      "s3:GetEncryptionConfiguration"
-    ]
-    resources = [
-      "*"
-    ]
-  }
-
-  statement {
-    effect = "Allow"
-    actions = [
-      "kms:GenerateDataKey"
-    ]
-    resources = [
-      "*"
-    ]
-  }
 }
 
 # SSMを使用するためのIAMポリシーの作成
@@ -63,7 +43,6 @@ resource "aws_ssm_document" "session_manager_prefs" {
     inputs = {
       s3BucketName        = var.log_bucket_name
       s3KeyPrefix         = "session_manager/"
-      s3EncryptionEnabled = true
     }
   })
 }
