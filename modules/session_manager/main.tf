@@ -45,7 +45,7 @@ resource "aws_ssm_document" "session_manager_prefs" {
     inputs = {
       s3BucketName        = var.log_bucket_name
       s3KeyPrefix         = "session_manager/"
-      s3EncryptionEnabled = true
+      s3EncryptionEnabled = false
     }
   })
 }
