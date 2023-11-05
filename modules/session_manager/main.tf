@@ -17,6 +17,16 @@ data "aws_iam_policy_document" "ec2_ssm_policy_doc" {
       "${var.log_bucket_arn}/*"
     ]
   }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:GetEncryptionConfiguration"
+    ]
+    resources = [
+      "*"
+    ]
+  }
 }
 
 # SSMを使用するためのIAMポリシーの作成
@@ -28,7 +38,7 @@ resource "aws_iam_policy" "ec2_ssm_policy" {
 # IAMポリシーをIAMロールに紐づける
 resource "aws_iam_role_policy_attachment" "ssm_core" {
   role       = var.role_name
-  policy_arn = data.aws_iam_policy.ssm_core.arn
+  policy_arn = aws_iam_policy.ec2_ssm_policy.arn
 }
 
 # Session Managerの設定
@@ -44,6 +54,7 @@ resource "aws_ssm_document" "session_manager_prefs" {
     inputs = {
       s3BucketName        = var.log_bucket_name
       s3KeyPrefix         = "session_manager/"
+      s3EncryptionEnabled = true
     }
   })
 }
