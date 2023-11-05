@@ -5,7 +5,7 @@ data "aws_iam_policy" "ssm_core" {
 
 # 操作ログを保存するためにS3への操作権限を追加
 data "aws_iam_policy_document" "ec2_ssm_policy_doc" {
-  source_policy_documents = [data.aws_iam_policy.ssm_core.json]
+  source_policy_documents = [data.aws_iam_policy.ssm_core.policy]
 
   statement {
     effect = "Allow"
