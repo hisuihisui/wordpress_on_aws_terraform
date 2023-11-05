@@ -13,7 +13,8 @@ data "aws_iam_policy_document" "ec2_ssm_policy_doc" {
       "s3:PutObject",
     ]
     resources = [
-      "${var.log_bucket_arn}/session_manager/*"
+      "${var.log_bucket_arn}",
+      "${var.log_bucket_arn}/*"
     ]
   }
 }
