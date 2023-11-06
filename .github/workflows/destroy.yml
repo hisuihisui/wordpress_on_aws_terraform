@@ -16,7 +16,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  Terraform_Apply:
+  Terraform_Destroy:
     runs-on: ubuntu-latest
 
     defaults:
